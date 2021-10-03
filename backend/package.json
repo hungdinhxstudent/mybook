@@ -5,11 +5,10 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^6.0.8",
-    "pm2": "^5.1.2"
+    "mongoose": "^6.0.8"
   }, 
   "scripts": {
-    "start": "pm2 start ./main.js",
+    "start": "node main.js",
     "dev": "nodemon main.js",
     "test": "mocha *.test.js --timeout 10000 --exit"
   },
