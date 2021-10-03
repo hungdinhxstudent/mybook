@@ -26,7 +26,8 @@ pipeline {
             steps {
                 sh 'chmod +x start.sh end.sh'
                 sh './start.sh'
-                // sh './end.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh './end.sh'
             }
         }
     }
