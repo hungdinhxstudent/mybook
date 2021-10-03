@@ -17,12 +17,16 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'yarn test'
+                dir('backend') {
+                    sh 'yarn test'
+                }
             }
         }
         stage('Deliver') {
             steps {
-                sh 'yarn start'
+                dir('backend') {
+                    sh 'yarn start'
+                }
             }
         }
     }
