@@ -24,9 +24,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                dir('backend') {
-                    sh 'yarn start'
-                }
+                sh './start.sh'
             }
         }
     }
