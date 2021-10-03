@@ -86,23 +86,50 @@ describe("Books", () => {
   });
 
   describe("/GET/:id books", () => {
-      it("it should GET  a book by the given id", (done) => {
-        let book = new Book({ title: "The Lord of the Rings", author: "J.R.R. Tolkien", year: 1954, pages: 1170 });
-        book.save((err, book) => {
-            chai.request(server)
-          .get('/api/books/' + book.id)
+    it("it should GET  a book by the given id", (done) => {
+      let book = new Book({
+        title: "The Lord of the Rings",
+        author: "J.R.R. Tolkien",
+        year: 1954,
+        pages: 1170,
+      });
+      book.save((err, book) => {
+        chai
+          .request(server)
+          .get("/api/books/" + book.id)
           .send(book)
           .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('title');
-                res.body.should.have.property('author');
-                res.body.should.have.property('pages');
-                res.body.should.have.property('year');
-                res.body.should.have.property('_id').eql(book.id);
+            res.should.have.status(200);
+            res.body.should.be.a("object");
+            res.body.should.have.property("title");
+            res.body.should.have.property("author");
+            res.body.should.have.property("pages");
+            res.body.should.have.property("year");
+            res.body.should.have.property("_id").eql(book.id);
             done();
           });
-        });
-      })
-  })
+      });
+    });
+  });
+
+  describe("/DELETE/:id book", () => {
+    it("it should delete a book by the given id", (done) => {
+      let book = new Book({
+        title: "The Lord of the Rings",
+        author: "J.R.R. Tolkien",
+        year: 1954,
+        pages: 1170,
+      });
+      book.save((err, book) => {
+        chai
+          .request(server)
+          .delete("/api/books/" + book.id)
+          .end((err, res) => {
+            res.should.have.status(206);
+
+            done();
+          });
+      });
+    });
+  });
 });

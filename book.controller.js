@@ -30,7 +30,7 @@ module.exports = {
     Book.findByIdAndDelete(id).exec((err, book) => {
       if (err) res.send(err);
       //If no errors, send them back to the client
-      res.json({ msg: "deleted " + id });
+      res.status(204).json({ msg: "deleted " + id });
     });
   },
   updateBook(req, res, next) {
