@@ -24,11 +24,9 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh "chmod +x start.sh end.sh"
-                dir('backend') {
-                    sh './start.sh'
-                    sh './end.sh'
-                }
+                sh 'chmod +x start.sh end.sh'
+                sh './start.sh'
+                sh './end.sh'
             }
         }
     }
