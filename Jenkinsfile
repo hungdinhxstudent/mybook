@@ -25,8 +25,7 @@ pipeline {
         stage('Deliver') {
             steps {
                 dir('backend') {
-                    sh 'yarn global add pm2'
-                    sh 'pm2 start main.js'
+                    sh 'yarn start'
                 }
             }
         }
