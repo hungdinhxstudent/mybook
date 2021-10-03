@@ -1,3 +1,4 @@
+/* groovylint-disable-next-line CompileStatic */
 pipeline {
     agent {
         docker {
@@ -9,23 +10,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('backend') {
-                    sh 'yarn install'
-                }
+                sh 'yarn install'
             }
         }
         stage('Test') {
             steps {
-                dir('backend') {
-                    sh 'yarn test'
-                }
+                sh 'yarn test'
             }
         }
-        stage('Deliver') {
+        stage('Deliver') { 
             steps {
-                dir('backend') {
-                    sh 'yarn start'
-                }
+                sh 'yarn start' 
             }
         }
     }
