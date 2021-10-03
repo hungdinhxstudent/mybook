@@ -3,7 +3,7 @@ pipeline {
     agent {
         docker {
             image 'node:16-alpine'
-            args '-p 3000:3000'
+            args '-p 9000:9000'
         }
     }
 
@@ -18,9 +18,9 @@ pipeline {
                 sh 'yarn test'
             }
         }
-        stage('Deliver') { 
+        stage('Deliver') {
             steps {
-                sh 'yarn start' 
+                sh 'yarn start'
             }
         }
     }
