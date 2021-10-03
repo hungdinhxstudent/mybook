@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sh 'chmod +x start.sh end.sh'
                 sh './start.sh'
-                sh './end.sh'
+                // sh './end.sh'
             }
         }
     }
