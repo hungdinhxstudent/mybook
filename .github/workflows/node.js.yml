@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-         working-directory: ./backend
+         working-directory: backend
     strategy:
       matrix:
         node-version: [16.x]
@@ -28,6 +28,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-    
+        cache-dependency-path: backend/
+        
     - run: yarn install
     - run: yarn test
