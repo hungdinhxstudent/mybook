@@ -125,7 +125,7 @@ describe("Books", () => {
           .request(server)
           .delete("/api/books/" + book.id)
           .end((err, res) => {
-            res.should.have.status(206);
+            res.should.have.status(204);
 
             done();
           });
