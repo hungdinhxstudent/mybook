@@ -1,28 +1,27 @@
 pipeline {
   agent any
   stages {
-    stage("Build"){
+    stage('Build'){
       steps {
-
-        dir("backend"){
-            sh "yarn install"
+        dir('backend'){
+            sh 'yarn install'
         }
       }
     }
-    stage("Test"){
+    stage('Test'){
       steps {
-        dir("backend"){
-            sh "yarn test"
-            sh "rm -rf node_modules"
+        dir('backend'){
+            sh 'yarn test'
+            sh 'rm -rf node_modules'
             
         }
       }
     }
-     stage("Deploy"){
+     stage('Deploy'){
         steps {
-            sh "docker-compose down"
-            sh "docker-compose up -d --build"
-            sh "docker image prune -f"
+            sh 'docker-compose down'
+            sh 'docker-compose up -d --build'
+            sh 'docker image prune -f'
         }
       }
   }
