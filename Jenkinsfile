@@ -1,34 +1,29 @@
-/* groovylint-disable-next-line CompileStatic */
 pipeline {
-    agent {
-        docker {
-            image 'node:16-alpine'
-            args '-p 9000:9000'
-        }
-    }
+  agent any
+  stages {
+    stage("Build"){
+      steps {
 
-    stages {
-        stage('Build') {
-            steps {
-                dir('backend') {
-                    sh 'yarn install'
-                }
-            }
+        dir("backend"){
+            sh "yarn install"
         }
-        stage('Test') {
-            steps {
-                dir('backend') {
-                    sh 'yarn test'
-                }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh 'chmod +x start.sh end.sh'
-                sh './start.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './end.sh'
-            }
-        }
+      }
     }
+    stage("Test"){
+      steps {
+        dir("backend"){
+            sh "yarn test"
+            sh "rm -rf node_modules"
+            
+        }
+      }
+    }
+     stage("Deploy"){
+        steps {
+            sh "docker-compose down"
+            sh "docker-compose up -d --build"
+            sh "docker image prune -f"
+        }
+      }
+  }
 }
